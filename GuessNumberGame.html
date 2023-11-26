@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Guess The Number Game</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <style>
+        body {
+            background-color: rgb(255, 239, 219);
+        }
+
+        .game-container {
+            width: 600px;
+            background-color: #fff;
+            padding: 30px;
+            margin: auto auto;
+            border: 10px solid burlywood;
+            border-radius: 3px;
+            text-align: center;
+            text-transform: capitalize;
+        }
+
+        .game-container h1 {
+            color: #f78d04;
+            font-family: monospace;
+        }
+
+        .game-container input {
+            width: 300px;
+            border: 1px solid #f2af59;
+            height: 30px;
+            border-radius: 3px;
+            font-size: 16px;
+            padding: 5px;
+        }
+
+        .game-container input:focus-visible {
+            outline: none;
+        }
+
+        .game-container button {
+            width: 150px;
+            height: 40px;
+            background-color: #f2af59;
+            color: #fff;
+            border: 1px solid #f2af59;
+            padding: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .game-container p {
+            font-size: 20px;
+            font-weight: 600;
+            font-family: monospace;
+        }
+
+        .game-container #statagain {
+            display: none;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="game-container">
+        <h1>Guess The Number From 1 to 10</h1>
+        <input id="guessnumber">
+        <button onclick="check()">Check</button>
+        <p id="result"></p>
+        <p id="score">Attempt:10</p>
+        <button id="statagain" onclick="newgame()">Start Again</button>
+    </div>
+    <script>
+        //sellecting input,paragraphs
+        var guessnumber = document.getElementById("guessnumber");
+        var resultvalue = document.getElementById("result");
+        var score = document.getElementById("score");
+        totalscore = 10;
+
+        //extra own code
+        var statagain = document.getElementById("statagain");
+
+        var randomnumber = Math.floor((Math.random() * 10) + 1);
+        //console.log(enternumber);
+        function check() {
+            var enterednumber = guessnumber.value;
+            if (randomnumber == enterednumber) {
+                resultvalue.textContent = "";
+                alert("You Won!!");
+                //extra own code
+                status();
+
+            } else if (totalscore == 0) {
+                alert("Your Game Over!!");
+                resultvalue.textContent = "";
+                //extra own code
+                status();
+            }
+            else {
+                totalscore = totalscore - 1;
+                score.textContent = "Remaining Attempt " + totalscore;
+                resultvalue.textContent = "Your are wrong";
+                //extra own code
+                guessnumber.value = "";
+            }
+        }
+
+        function newgame() {
+            window.location.reload();
+        }
+        function status() {
+            guessnumber.value = "";
+            statagain.style.display = "block";
+            score.style.display = "none";
+
+        }
+    </script>
+
+</body>
+
+</html>
